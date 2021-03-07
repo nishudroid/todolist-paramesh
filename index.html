@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>
+        TODO LIST</title>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script></head>
+    
+    <style>
+        body{
+            background-image: url(todo.jpg);
+            
+        }
+    body input{
+        text-align:left;
+        
+        }
+    button{
+          text-align:right;
+        }
+    .jumbotron{
+        background-color:transparent;
+        color:white;
+        }
+.jumbotron i{
+    opacity:9;
+        }
+        th{
+            background-color:#1ebba3;
+            
+        }
+        .container{
+            border-radius:50px;
+        }</style>
+<body ng-app="myApp" ng-controller="todoCtrl"><center>
+
+    <h2 class="jumbotron"><i><b>My To-do List</b></i></h2>
+
+<form ng-submit="todoAdd()">
+    <input type="text" ng-model="todoInput" size="90" style="height:40px; width:1020px;" placeholder="Add New">
+    <input type="submit" class="btn btn-success"  style="height:44px;"  value="Add New">
+</form>
+
+<br>
+    <div class="container">
+    <div class="row">
+        <div class="col">
+        <table class="table table-bordered table-hover" style="background-color: rgba(255,255,255,0.8);">
+            <tr><th><center><b>TO-DO LIST FOR MY PROJECT</b></center></th></tr>
+            
+            <tr ng-repeat="x in todoList">
+            <td>
+                <input type="checkbox" ng-model="x.done" type="checkbox"> <span ng-bind="x.todoText"></span>
+       
+                </td></tr></table></div>
+        
+         
+             
+
+            
+        </div></div>
+
+
+<p><button  class="btn btn-danger" ng-click="remove()">Remove marked</button></p>
+
+<script>
+var app = angular.module('myApp', []); 
+app.controller('todoCtrl', function($scope) {
+    $scope.todoList = [{todoText:'Planning', done:false},
+                      {todoText:'Requirements Specification', done:false},
+                      {todoText:'construction', done:false},
+                       {todoText:'Designing', done:false},
+                       {todoText:'Implementing', done:false},
+                       {todoText:'Deploying', done:false}
+                      ];
+
+    $scope.todoAdd = function() {
+        $scope.todoList.push({todoText:$scope.todoInput, done:false});
+        $scope.todoInput = "";
+    };
+
+    $scope.remove = function() {
+        var oldList = $scope.todoList;
+        $scope.todoList = [];
+        angular.forEach(oldList, function(x) {
+            if (!x.done) $scope.todoList.push(x);
+        });
+    };
+});
+</script></center>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
